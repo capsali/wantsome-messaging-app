@@ -9,12 +9,16 @@
     - options:
         - envvars
         - file config
-Nice to have:
+
+
+Nice to have, but not required:
+
 - Load chat history when connecting *** 
     - will have to preserve state - how? files, db?
 - User login - bind connection to username 
     - should we change username? how? 
 
+---
 
 ## CLIENT
 

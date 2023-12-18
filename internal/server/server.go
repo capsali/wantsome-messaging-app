@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -16,7 +17,15 @@ func RunServer() {
 
 	go handleMsg()
 
-	server := &http.Server{Addr: ":8080"}
+	config, err := LoadConfig("config.server.toml")
+	if err != nil {
+		fmt.Printf("error: %v", err)
+	}
+	//fmt.Printf("Server: %v\n", config.Server.Port)
+	listenAddress := fmt.Sprintf("%s:%d", config.Server.Host, config.Server.Port)
+	server := &http.Server{Addr: listenAddress}
+
+	//server := &http.Server{Addr: ":8080"}
 
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
